@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -44,14 +48,19 @@ public class Offer implements Serializable {
 	private long id;
 
 	@Column
+	@NotBlank
 	@Getter @Setter
 	private String customer;
 	
 	@Column
+	@NotBlank
 	@Getter @Setter
 	private String description;
 
 	@Column
+	@NotNull
+	@Digits(fraction = 2, integer = 8)
+	@DecimalMin("00.01")
 	@Getter @Setter
 	private BigDecimal price;
 	
@@ -98,5 +107,18 @@ public class Offer implements Serializable {
 					.isEquals();
 		}
 	}
-
+	
+//	@Override
+//	public String toString() {
+//		StringBuffer sb = new StringBuffer();
+//		sb.append("id:").append(this.id + ",\n")
+//			.append("customer:").append(this.customer + ",\n")
+//			.append("description:").append(this.description + ",\n")
+//			.append("price:").append(this.price + "\n")
+//			.append("createdAt:").append(this.createdAt + ",\n")
+//			.append("validityDays:").append(this.validityDays + ",\n");
+//		
+//		return sb.toString();
+//	}
+	
 }

@@ -17,19 +17,5 @@ public class CustomerNotFoundException extends BaseException {
 		return "CUSTOMER_NOT_FOUND";
 	}
 
-	public CustomerNotFoundException() {
-		super();
-	}
-
-	public CustomerNotFoundException(String message) {
-		super(message);
-	}
-
-	public CustomerNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-	
-	
-
 }
 

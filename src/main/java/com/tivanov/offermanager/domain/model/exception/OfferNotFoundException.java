@@ -16,15 +16,4 @@ public class OfferNotFoundException extends BaseException {
 		return "OFFER_NOT_FOUND";
 	}
 
-	public OfferNotFoundException() {
-		super();
-	}
-
-	public OfferNotFoundException(String message) {
-		super(message);
-	}
-
-	public OfferNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
 }

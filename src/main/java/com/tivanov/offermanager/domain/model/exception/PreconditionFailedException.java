@@ -13,19 +13,5 @@ public class PreconditionFailedException extends BaseException {
 		return "DATA_REQUEST_NOT_CORRECT";
 	}
 
-	public PreconditionFailedException() {
-		super();
-	}
-
-	public PreconditionFailedException(String message) {
-		super(message);
-	}
-
-	public PreconditionFailedException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-	
-	
-
 }
 

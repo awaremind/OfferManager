@@ -1,5 +1,8 @@
 package com.tivanov.offermanager.domain.model.exception;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.UnexpectedTypeException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -19,7 +22,9 @@ public class ExceptionTranslator {
 		MissingServletRequestParameterException.class, 
 		MethodArgumentTypeMismatchException.class,
 		JsonMappingException.class,
-		JsonProcessingException.class
+		JsonProcessingException.class,
+		UnexpectedTypeException.class,
+		ConstraintViolationException.class
 		})
 	public ResponseEntity<Object> exceptionHandler(final Exception e) {
 		return new ResponseEntity<>(HttpStatus.PRECONDITION_FAILED);
