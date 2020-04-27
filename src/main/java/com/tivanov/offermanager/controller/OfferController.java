@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.tivanov.offermanager.domain.model.exception.PreconditionFailedException;
 import com.tivanov.offermanager.domain.model.offer.Offer;
 import com.tivanov.offermanager.domain.service.OfferServiceRestFacade;
 
@@ -63,7 +62,7 @@ public class OfferController {
 	@RequestMapping("/offer")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public ResponseEntity<?> sendMessage(@RequestBody @NotNull String offerString) 
-			throws PreconditionFailedException, JsonMappingException, JsonProcessingException {
+			throws JsonMappingException, JsonProcessingException {
 		Offer offer = offeringServiceFacade.saveOffer(offerString);
 		return new ResponseEntity<>(offer, HttpStatus.CREATED);
 	}

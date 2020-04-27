@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tivanov.offermanager.domain.model.exception.CustomerNotFoundException;
+import com.tivanov.offermanager.domain.model.exception.OfferNotFoundException;
 import com.tivanov.offermanager.domain.model.offer.Offer;
 import com.tivanov.offermanager.domain.service.OfferingService;
 import com.tivanov.offermanager.utils.OffersTestFactory;
@@ -54,9 +57,23 @@ class OfferControllerTest {
 	}
 	
 	@Test
+	void testGetMissingOfferById_shouldThrowException() throws Exception {
+		Mockito.when(service.findById(1)).thenThrow(OfferNotFoundException.class);
+		mockMvc.perform(delete("/offer/id/1"))
+			.andExpect(status().isNotFound());
+	}
+	
+	@Test
 	void testDeleteOfferById_shouldDeleteOffer() throws Exception {
 		mockMvc.perform(delete("/offer/cancel/1"))
 			.andExpect(status().isOk());
+	}
+	
+	@Test
+	void testGetMissingCustomerOfferById_shouldThrowException() throws Exception {
+		Mockito.when(service.findOfferByCustomer("nobody")).thenThrow(CustomerNotFoundException.class);
+		mockMvc.perform(delete("/offer/nobody"))
+		.andExpect(status().isNotFound());
 	}
 	
 	@Test
